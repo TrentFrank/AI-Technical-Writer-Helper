@@ -1,0 +1,55 @@
+Generating Documentation Drafts
+Use these prompts to transform raw notes or code snippets into well-structured documentation drafts:
+
+Basic Draft Creation:
+"Generate a clear technical documentation draft for the following notes: [insert notes]. Format it in Markdown."
+
+Code Comment Explanation:
+"Explain the purpose and function of this code snippet for documentation: [insert code]."
+
+Feature Overview Draft:
+"Write a user-friendly feature overview section for the product based on: [insert feature details]."
+
+Reviewing Documentation Quality
+Use these prompts to review clarity, grammar, and style:
+
+Clarity and Grammar Check:
+"Review this documentation text for grammar and clarity issues and suggest improvements: [insert text]."
+
+Simplify Technical Language:
+"Rewrite the following paragraph to be more accessible for non-expert readers: [insert text]."
+
+Style and Tone Suggestions:
+"Suggest improvements to the tone and style to make this documentation more engaging: [insert text]."
+
+Fetching and Using GitHub Updates
+Prompts to integrate repository updates for maintaining accurate documentation:
+
+Summarize Recent Changes:
+"Provide a summary of the latest commits and issues in the GitHub repo [owner/repo] that affect documentation."
+
+Highlight Important Updates:
+"Identify key pull requests and issues that require documentation updates for the repo [owner/repo]."
+
+Example API Usage
+Generate Documentation
+
+bash
+curl -X POST http://localhost:8000/generate \
+-H "Content-Type: application/json" \
+-d '{
+  "input_text": "This module handles user authentication including login and token refresh.",
+  "target_format": "Markdown"
+}'
+Review Documentation
+
+bash
+curl -X POST http://localhost:8000/review \
+-H "Content-Type: application/json" \
+-d '{
+  "doc_text": "To log in, input your username and password correctly. If you encounter errors, please retry or contact support."
+}'
+Fetch Updates for Repo
+
+bash
+curl "http://localhost:8000/fetch-updates?repo=owner/repo"
