@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: AI Technical Writer Helper API
+  description: API for assisting technical writers with AI-powered documentation tasks.
+  version: 1.0.0
+servers:
+  - url: https://api.example.com
+paths:
+  /generate:
+    post:
+      summary: Generate Documentation Draft
+      description: Use AI to create a documentation draft from raw notes or code.
+      requestBody:
+        description: Raw notes or codebase snapshot.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input_text:
+                  type: string
+                  description: The source notes or code to turn into documentation.
+                target_format:
+                  type: string
+                  enum: [Markdown, AsciiDoc, HTML]
+                  description: Desired documentation format.
+      responses:
+        '200':
+          description: Generated documentation draft
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  output_text:
+                    type: string
+                    description: Drafted documentation.
+  /review:
+    post:
+      summary: AI Content Review
+      description: Analyze clarity, grammar, and style in technical documentation.
+      requestBody:
+        description: Text to review.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doc_text:
+                  type: string
+                  description: The documentation to review.
+      responses:
+        '200':
+          description: Review results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  suggestions:
+                    type: array
+                    items:
+                      type: string
+                  score:
+                    type: integer
+                    description: Overall clarity score.
+  /fetch-updates:
+    get:
+      summary: Fetch GitHub repo change log
+      description: Retrieve the commit log and issue updates to guide documentation changes.
+      parameters:
+        - in: query
+          name: repo
+          required: true
+          schema:
+            type: string
+          description: GitHub repo (owner/name)
+      responses:
+        '200':
+          description: Repo updates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updates:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                        type:
+                          type: string
+                          enum: [commit, issue, pull_request]
+                        description:
+                          type: string
